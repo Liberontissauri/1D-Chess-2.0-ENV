@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: ./1D-Chess-2.0-Frontend
+    container_name: ReactFrontend
+    volumes:
+      - ./1D-Chess-2.0-Frontend:/frontend/1D-Chess-2.0-Frontend:rw
+    environment:
+      ENV: dev
+
+  nginx:
+    image: nginx:mainline-alpine3.18-slim
+    container_name: WebServer
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
