@@ -12,16 +12,23 @@ services:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
       - ./config/nginx/certs:/etc/nginx/certs
     networks:
-      default:
+      1dchessmain:
         ipv4_address: 172.18.0.2
 
   frontend:
     build: ./1D-Chess-2.0-Frontend
     container_name: ReactFrontend
     networks:
-      default:
+      1dchessmain:
         ipv4_address: 172.18.0.3
     volumes:
       - ./1D-Chess-2.0-Frontend:/frontend/1D-Chess-2.0-Frontend:rw
     environment:
       ENV: dev
+
+networks:
+  1dchessmain:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
